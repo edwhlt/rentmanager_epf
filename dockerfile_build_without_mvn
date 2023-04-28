@@ -1,0 +1,12 @@
+FROM tomcat:10.0.27-jdk17-corretto-al2
+
+#COPY /target/rentmanager.war /usr/local/tomcat/webapps/
+#RUN sed -i 's/port="8080"/port="8083"/' ${CATALINA_HOME}/conf/server.xml
+
+COPY /target/rentmanager.war ${CATALINA_HOME}/webapps/
+
+# copier le webapps.dist pour avoir les options tomcat
+RUN mv webapps.dist/* webapps/
+
+EXPOSE 8083
+CMD ["catalina.sh", "run"]
